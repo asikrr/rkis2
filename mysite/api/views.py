@@ -30,3 +30,13 @@ class BookList(generics.ListCreateAPIView):
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
+
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAdminUser]
+
+class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = [IsAdminUser]

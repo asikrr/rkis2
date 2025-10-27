@@ -13,20 +13,20 @@ class AuthorList(generics.ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'GET':
-            permission_classes = []  # Разрешаем всем
+            permission_classes = []
         else:
-            permission_classes = [IsAdminUser]  # Только админ
+            permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
 class BookList(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'author', 'genre']
+    search_fields = ['title', 'author__last_name', 'author__first_name', 'genre']
 
     def get_permissions(self):
         if self.request.method == 'GET':
-            permission_classes = []  # Разрешаем всем
+            permission_classes = []
         else:
-            permission_classes = [IsAdminUser]  # Только админ
+            permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]

@@ -7,6 +7,9 @@ class Author(models.Model):
     patronymic = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
 
+    class Meta:
+        unique_together = ('first_name', 'last_name', 'patronymic')
+
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
